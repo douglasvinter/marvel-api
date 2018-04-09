@@ -1,7 +1,6 @@
 package br.com.marvel.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -54,26 +53,18 @@ public class MarvelCharactersByComicModel implements Serializable {
 	private double totalPriceForCharacterComics;
 
 	public String getName() {
-		return (name != null && !name.isEmpty()) ? name : "";
+		return name;
 	}
 
 	public String getDescription() {
-		return (description != null && !description.isEmpty()) ? description : "";
+		return description;
 	}
 
 	public ThumbnailModel getThumbnail() {
-		if (thumbnail == null) {
-			thumbnail = new ThumbnailModel();
-		}
-
 		return thumbnail;
 	}
 
 	public List<MarvelComicSummaryModel> getComics() {
-		if (comics == null) {
-			comics = new ArrayList<MarvelComicSummaryModel>();
-		}
-
 		return comics;
 	}
 
@@ -98,10 +89,6 @@ public class MarvelCharactersByComicModel implements Serializable {
 	}
 
 	public void addComics(MarvelComicSummaryModel comics) {
-		if (this.comics == null) {
-			this.comics = new ArrayList<MarvelComicSummaryModel>();
-		}
-
 		this.comics.add(comics);
 	}
 

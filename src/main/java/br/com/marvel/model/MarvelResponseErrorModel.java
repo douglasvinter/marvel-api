@@ -7,7 +7,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MarvelResponseErrorModel implements Serializable {
-	
+	/**
+	 * Serializer version
+	 */
 	private static final long serialVersionUID = 1L;
 	
 	private static final String UNKNOW_API_ERROR = "Unknow API error";

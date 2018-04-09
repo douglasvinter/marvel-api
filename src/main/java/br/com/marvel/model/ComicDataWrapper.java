@@ -64,29 +64,26 @@ public class ComicDataWrapper implements Serializable {
 	}
 
 	public String getStatus() {
-		return (status != null) ? status : "";
+		return status;
 	}
 
 	public String getCopyright() {
-		return (copyright != null) ? copyright : "";
+		return copyright;
 	}
 
 	public String getAttributionText() {
-		return (attributionText != null) ? attributionText : "";
+		return attributionText;
 	}
 
 	public String getAttributionHTML() {
-		return (attributionHTML != null) ? attributionHTML : "";
+		return attributionHTML;
 	}
 
 	public String getEtag() {
-		return (etag != null) ? etag : "";
+		return etag;
 	}
 
 	public ComicDataContainer getData() {
-		if (data == null) {
-			data = new ComicDataContainer();
-		}
 		return data;
 	}
 

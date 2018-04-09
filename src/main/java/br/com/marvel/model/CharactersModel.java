@@ -1,7 +1,6 @@
 package br.com.marvel.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -102,49 +101,26 @@ public class CharactersModel implements Serializable {
 	}
 
 	public List<GenericUrlModel> getUrls() {
-		if (urls == null) {
-			urls = new ArrayList<GenericUrlModel>();
-		}
 		return urls;
 	}
 
 	public ThumbnailModel getThumbnail() {
-		if (thumbnail == null) {
-			thumbnail = new ThumbnailModel();
-		}
-
 		return thumbnail;
 	}
 
 	public GenericListModel getComics() {
-		if (comics == null) {
-			comics = new GenericListModel();
-		}
-
 		return comics;
 	}
 
 	public GenericListModel getStories() {
-		if (stories == null) {
-			stories = new GenericListModel();
-		}
-
 		return stories;
 	}
 
 	public GenericListModel getEvents() {
-		if (events == null) {
-			events = new GenericListModel();
-		}
-
 		return events;
 	}
 
 	public GenericListModel getSeries() {
-		if (series == null) {
-			series = new GenericListModel();
-		}
-
 		return series;
 	}
 

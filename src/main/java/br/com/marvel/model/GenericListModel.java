@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GenericListModel implements Serializable {
 	/**
-	 * 
+	 * Serializer version
 	 */
 	private static final long serialVersionUID = 1L;
 	

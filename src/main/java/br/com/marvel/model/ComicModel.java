@@ -1,7 +1,6 @@
 package br.com.marvel.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -185,7 +184,7 @@ public class ComicModel implements Serializable {
 	}
 
 	public String getTitle() {
-		return (title != null) ? title : "";
+		return title;
 	}
 
 	public double getIssueNumber() {
@@ -193,19 +192,19 @@ public class ComicModel implements Serializable {
 	}
 
 	public String getVariantDescription() {
-		return (variantDescription != null) ? variantDescription : "";
+		return variantDescription;
 	}
 
 	public String getDescription() {
-		return (description != null) ? description : "";
+		return description;
 	}
 
 	public String getModified() {
-		return (modified != null) ? modified : "";
+		return modified;
 	}
 
 	public String getIsbn() {
-		return (isbn != null) ? isbn : "";
+		return isbn;
 	}
 
 	public String getUpc() {
@@ -213,19 +212,19 @@ public class ComicModel implements Serializable {
 	}
 
 	public String getDiamondCode() {
-		return (diamondCode != null) ? diamondCode : "";
+		return diamondCode;
 	}
 
 	public String getEan() {
-		return (ean != null) ? ean : "";
+		return ean;
 	}
 
 	public String getIssn() {
-		return (issn != null) ? issn : "";
+		return issn;
 	}
 
 	public String getFormat() {
-		return (format != null) ? format : "";
+		return format;
 	}
 
 	public int getPageCount() {
@@ -233,118 +232,63 @@ public class ComicModel implements Serializable {
 	}
 
 	public List<TextObjectModel> getTextObjects() {
-		if (textObjects == null) {
-			textObjects = new ArrayList<TextObjectModel>();
-		}
-
 		return textObjects;
 	}
 
 	public String getResourceURI() {
-		return (resourceURI != null) ? resourceURI : "";
+		return resourceURI;
 	}
 
 	public List<GenericUrlModel> getUrls() {
-		if (urls == null) {
-			urls = new ArrayList<GenericUrlModel>();
-		}
-
 		return urls;
 	}
 
 	public ItemsListModel getSeries() {
-		if (series == null) {
-			series = new ItemsListModel();
-		}
 
 		return series;
 	}
 
 	public List<GenericListModel> getVariants() {
-		if (variants == null) {
-			variants = new ArrayList<GenericListModel>();
-		}
-
 		return variants;
 	}
 
 	public List<GenericListModel> getCollections() {
-		if (collections == null) {
-			collections = new ArrayList<GenericListModel>();
-		}
-
 		return collections;
 	}
 
 	public List<GenericListModel> getCollectedIssues() {
-		if (collectedIssues == null) {
-			collectedIssues = new ArrayList<GenericListModel>();
-		}
-
 		return collectedIssues;
 	}
 
 	public List<DatesModel> getDates() {
-		if (dates == null) {
-			dates = new ArrayList<DatesModel>();
-		}
-
 		return dates;
 	}
 
 	public List<PriceModel> getPrices() {
-		if (prices == null) {
-			prices = new ArrayList<PriceModel>();
-		}
-
 		return prices;
 	}
 
 	public ThumbnailModel getThumbnail() {
-		if (thumbnail == null) {
-			thumbnail = new ThumbnailModel();
-		}
-
 		return thumbnail;
 	}
 
 	public List<ThumbnailModel> getImages() {
-		if (images == null) {
-			images = new ArrayList<ThumbnailModel>();
-		}
-
 		return images;
 	}
 
 	public GenericListModel getCreators() {
-		if (creators == null) {
-			creators = new GenericListModel();
-		}
-
 		return creators;
 	}
 
 	public GenericListModel getCharacters() {
-		if (characters == null) {
-			characters = new GenericListModel();
-		}
-
 		return characters;
 	}
 
 	public GenericListModel getStories() {
-		if (stories == null) {
-			stories = new GenericListModel();
-		}
-
 		return stories;
 	}
 
 	public GenericListModel getEvents() {
-		if (events == null) {
-			events = new GenericListModel();
-		}
-
 		return events;
 	}
 

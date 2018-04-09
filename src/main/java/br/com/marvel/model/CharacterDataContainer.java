@@ -1,7 +1,6 @@
 package br.com.marvel.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -64,9 +63,6 @@ public class CharacterDataContainer implements Serializable {
 	}
 
 	public List<CharactersModel> getResults() {
-		if (results == null) {
-			results = new ArrayList<CharactersModel>();
-		}
 		return results;
 	}
 

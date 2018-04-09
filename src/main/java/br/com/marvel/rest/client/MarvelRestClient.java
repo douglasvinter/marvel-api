@@ -17,12 +17,14 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import br.com.marvel.config.MarvelConfig;
 import br.com.marvel.model.MarvelResponseErrorModel;
+import br.com.marvel.rest.client.exceptions.RestClientException;
 
+@Component
 public class MarvelRestClient {
-
 	/**
 	 * API public key
 	 */
@@ -74,17 +76,9 @@ public class MarvelRestClient {
 	 */
 	public <T> T get(String endpoint, Class<T> targetClass)
 			throws RestClientException, JsonParseException, JsonMappingException, IOException {
-		Client client = ClientBuilder.newClient();
-		long ts = System.currentTimeMillis();
-		String dk = generateDigestHash(ts);
 
-		if (dk == null) {
-			throw new RestClientException("Unsupported environment");
-		}
-
-		final WebTarget wt = client.target(BASE_API_URI).path(endpoint).queryParam("ts", ts)
-				.queryParam("apikey", publicKey).queryParam("hash", dk).queryParam("limit", DEFAULT_API_RESULT_LIMIT);
-
+		final WebTarget wt = buildRequestFor(endpoint);
+		
 		LOG.info("Fetching request for endpoint: " + wt.getUri().toString());
 
 		Invocation.Builder ib = wt.request(MediaType.APPLICATION_JSON);
@@ -92,15 +86,29 @@ public class MarvelRestClient {
 
 		ib.header("Accept-Encoding", "gzip/deflate");
 		LOG.info("Http response status code: " + String.valueOf(response.getStatus()));
+
 		if (response.getStatus() != 200) {
 			String json = response.readEntity(String.class);
 			MarvelResponseErrorModel mrem = objectMapper.readValue(json, MarvelResponseErrorModel.class);
 			throw new RestClientException(mrem.toString());
 		}
-		// Conexão encerrada após a leitura da entidade
+
 		String json = response.readEntity(String.class);
 		LOG.info(json);
 		return objectMapper.readValue(json, targetClass);
+	}
+	
+	
+	private WebTarget buildRequestFor(final String endpoint) throws RestClientException{
+		Client client = ClientBuilder.newClient();
+		long ts = System.currentTimeMillis();
+		String dk = generateDigestHash(ts);
+
+		if (dk == null) {
+			throw new RestClientException("Unsupported environment");
+		}
+		return client.target(BASE_API_URI).path(endpoint).queryParam("ts", ts)
+				.queryParam("apikey", publicKey).queryParam("hash", dk).queryParam("limit", DEFAULT_API_RESULT_LIMIT);
 	}
 
 	/**
@@ -114,7 +122,7 @@ public class MarvelRestClient {
 	 *            API private key
 	 * @return hash digest using MD5 algo
 	 */
-	public String generateDigestHash(long timestamp) {
+	private String generateDigestHash(long timestamp) {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			String toHash = timestamp + privateKey + publicKey;

@@ -17,7 +17,7 @@ import br.com.marvel.model.MarvelComicSummaryModel;
 import br.com.marvel.model.PriceModel;
 import br.com.marvel.repository.CharacterRepository;
 import br.com.marvel.repository.ComicRepository;
-import br.com.marvel.rest.client.RestClientException;
+import br.com.marvel.rest.client.exceptions.RestClientException;
 
 /**
  * Service for marvel character API
@@ -43,14 +43,6 @@ public class CharacterService {
 	 */
 	protected final static Logger LOG = LoggerFactory.getLogger(CharacterService.class);
 
-	/**
-	 * Retrieves {gateway-marvel}/characters data. The fall back for exceptions is
-	 * check for existent cache data
-	 * 
-	 * @param refresh
-	 *            force API data refresh instead of cached data
-	 * @return Collection of marvel characters
-	 */
 	@Cacheable("characters")
 	public List<CharactersModel> getCharacters() {
 		List<CharactersModel> cm = null;
@@ -64,17 +56,7 @@ public class CharacterService {
 		return cm != null ? cm : new ArrayList<CharactersModel>();
 	}
 
-	/**
-	 * Retrieves {gateway-marvel}/characters/{characterI} data. The fall back for
-	 * exceptions is check for existent cache data
-	 * 
-	 * @param characterId
-	 *            marvel character Id
-	 * @param refresh
-	 *            force API data refresh instead of cached data
-	 * @return Single entity representing a marvel character
-	 */
-	@Cacheable("charactersById")
+	@Cacheable(value="characters", key="#character.id")
 	public CharactersModel getCharacterById(int characterId) {
 		CharactersModel cm = null;
 
@@ -96,7 +78,7 @@ public class CharacterService {
 	 * @return Collections of custom Entity, containing a summary of the character
 	 *         and the comics this characters makes part of, if any.
 	 */
-	@Cacheable("allCharactersInformation")
+	@Cacheable("charactersInProducts")
 	public List<MarvelCharactersByComicModel> getAllCharactersInformation() {
 		List<CharactersModel> characters = this.getCharacters();
 		List<MarvelCharactersByComicModel> cbc = new ArrayList<MarvelCharactersByComicModel>();
@@ -131,6 +113,8 @@ public class CharacterService {
 						mcsm.setPageCount(comic.getPageCount());
 						mcbcm.addComics(mcsm);
 					}
+
+					
 				}
 				cbc.add(mcbcm);
 			}

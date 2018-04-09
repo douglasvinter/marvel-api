@@ -7,29 +7,25 @@ import javax.ws.rs.Produces;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import br.com.marvel.services.MarvelService;
 
-@Controller
+@RestController
 @Produces(MediaType.APPLICATION_JSON_VALUE)
 public class Marvel {
 
 	@Autowired
 	public MarvelService marvelService;
 
-	@ResponseBody
-	@RequestMapping(value = "/{message}", method = RequestMethod.GET)
+	@GetMapping("/{message}")
 	public HashMap<String, String> helloMarvel(@PathVariable("message") @NotNull String message) {
 		return marvelService.helloMarvel(message);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping("/")
 	public HashMap<String, String> avengersAssemble() {
 		return marvelService.avengerAssemble();
 	}

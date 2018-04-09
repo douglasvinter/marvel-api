@@ -1,7 +1,6 @@
 package br.com.marvel.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -48,22 +47,19 @@ public class MarvelComicSummaryModel implements Serializable {
 	private int pageCount;
 
 	public String getTitle() {
-		return (title != null && !title.isEmpty()) ? title : "";
+		return title;
 	}
 
 	public String getDescription() {
-		return (description != null && !description.isEmpty()) ? description : "";
+		return description;
 	}
 
 	public List<PriceModel> getPrice() {
-		if (price == null) {
-			price = new ArrayList<PriceModel>();
-		}
 		return price;
 	}
 
 	public String getIsbn() {
-		return (isbn != null && !isbn.isEmpty()) ? isbn : "";
+		return isbn;
 	}
 
 	public int getPageCount() {

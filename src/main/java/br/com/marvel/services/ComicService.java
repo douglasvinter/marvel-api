@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.marvel.model.ComicModel;
 import br.com.marvel.repository.ComicRepository;
-import br.com.marvel.rest.client.RestClientException;
+import br.com.marvel.rest.client.exceptions.RestClientException;
 
 /**
  * Service for marvel comics API
@@ -70,7 +70,7 @@ public class ComicService {
 	 *            force API data refresh instead of cached data
 	 * @return Single entity representing a marvel comic
 	 */
-	@Cacheable("comicsById")
+	@Cacheable(value="comics", key="comic.id")
 	public ComicModel getComicById(int comicId) {
 		ComicModel cm = null;
 
@@ -93,7 +93,7 @@ public class ComicService {
 	 *            force API data refresh instead of cached data
 	 * @return Collections of comics per character
 	 */
-	@Cacheable("comicsByCharacterId")
+	@Cacheable(value="comics", key="comic.character.id")
 	public List<ComicModel> getComicsByCharacterId(int characterId) {
 		List<ComicModel> cm = null;
 

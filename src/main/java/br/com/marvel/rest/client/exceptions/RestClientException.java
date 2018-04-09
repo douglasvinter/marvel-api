@@ -1,4 +1,4 @@
-package br.com.marvel.rest.client;
+package br.com.marvel.rest.client.exceptions;
 
 public class RestClientException extends Exception {
 
@@ -7,7 +7,7 @@ public class RestClientException extends Exception {
 	}
 
 	/**
-	 * 
+	 * Serializer version
 	 */
 	private static final long serialVersionUID = 1L;
 

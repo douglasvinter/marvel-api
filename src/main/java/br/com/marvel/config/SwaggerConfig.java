@@ -18,12 +18,15 @@ public class SwaggerConfig {
 	@Bean
 	public Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("br.com.marvel.resources")).paths(regex("/*.*")).build();
+				.apis(RequestHandlerSelectors.basePackage("br.com.marvel.resources"))
+				.paths(regex("/*.*"))
+				.build()
+				.apiInfo(apiInfo());
 
 	}
 
-	private ApiInfo metaData() {
-		ApiInfo apiInfo = new ApiInfo("Spring Boot REST API", "Spring Boot REST API for Marvel", "0.0.1",
+	private ApiInfo apiInfo() {
+		ApiInfo apiInfo = new ApiInfo("Spring Boot Marvel REST API", "Marvel Gateway API", "1.0.0",
 				"Terms of service",
 				new Contact("Douglas W. Branco", "https://github.com/douglasvinter", "douglasvinter@gmail.com"),
 				"Apache License Version 2.0", "https://www.apache.org/licenses/LICENSE-2.0");

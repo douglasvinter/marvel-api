@@ -86,6 +86,7 @@ public class CharactersDataWrapper implements Serializable {
 		if (data == null) {
 			data = new CharacterDataContainer();
 		}
+
 		return data;
 	}
 
